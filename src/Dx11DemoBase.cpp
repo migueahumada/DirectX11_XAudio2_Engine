@@ -130,8 +130,8 @@ bool Dx11DemoBase::Intialize(HINSTANCE hInstance, HWND hwnd)
 			return false;
 	}
 
-	const WCHAR* path = L"D:\\Coding\\C++\\Direct3DPractice\\AudioPrueba.wav";
-	const char* path2 = "D:/Coding/C++/Direct3DPractice/AudioPrueba.wav";
+	const WCHAR* path = L"D:\\Coding\\C++\\Direct3DPractice\\rsc\\AudioPrueba.wav";
+	const char* path2 = "./rsc/AudioPrueba.wav";
 	m_audioFile.load(path2);
 
 	result = m_pXAudio2->CreateSourceVoice(&m_pXAudio2SourceVoice, reinterpret_cast<WAVEFORMATEX*>(& m_audioFile.m_waveFile));

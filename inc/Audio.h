@@ -36,8 +36,6 @@ public:
 		
 	}
 
-	HRESULT decodeOLD(const WCHAR* filename);
-
 	//Load a wave file to a XAUDIO2BUFFER struct
 	void load(const char* filename);
 	
@@ -47,8 +45,6 @@ public:
 	XAUDIO2_BUFFER m_buffer{ 0 };
 
 protected:
-	HRESULT findChunk(HANDLE hFile, DWORD fourcc, DWORD& dwChunkSize, DWORD& dwChunkDataPosition);
-	HRESULT readChunkData(HANDLE hFile, void* buffer, DWORD buffersize, DWORD bufferoffset);
 
 	unsigned char* m_pDataBuffer = nullptr;
 };

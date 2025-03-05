@@ -76,6 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -91,6 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -106,6 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -121,6 +124,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -131,17 +135,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="BlankDemo.cpp" />
-    <ClCompile Include="Dx11DemoBase.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MediaReader.cpp" />
+    <ClInclude Include="inc\Audio.h" />
+    <ClInclude Include="inc\BlankDemo.h" />
+    <ClInclude Include="inc\Dx11DemoBase.h" />
+    <ClInclude Include="inc\MediaReader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h" />
-    <ClInclude Include="BlankDemo.h" />
-    <ClInclude Include="Dx11DemoBase.h" />
-    <ClInclude Include="MediaReader.h" />
+    <ClCompile Include="src\Audio.cpp" />
+    <ClCompile Include="src\BlankDemo.cpp" />
+    <ClCompile Include="src\Dx11DemoBase.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MediaReader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rsc\AudioPrueba.bin" />
+    <None Include="rsc\BirdDuck .bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="rsc\AudioPrueba.wav" />
+    <Media Include="rsc\BirdDuck.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
