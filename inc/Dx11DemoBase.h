@@ -37,6 +37,8 @@ protected:
 	
 	//Audio
 	IXAudio2* m_pXAudio2 = nullptr;
+	
+	
 	IXAudio2MasteringVoice* m_pXAudio2MasteringVoice = nullptr;
 	IXAudio2SourceVoice* m_pXAudio2SourceVoice = nullptr;
 	Audio m_audioFile;

@@ -10,10 +10,6 @@ BlankDemo::~BlankDemo()
 
 bool BlankDemo::LoadContent()
 {
-
-
-
-
 	return true;
 }
 
@@ -24,6 +20,10 @@ void BlankDemo::UnloadContent()
 
 void BlankDemo::Update(float dt)
 {
+	if (GetAsyncKeyState(VK_ESCAPE))
+	{
+		PostQuitMessage(0);
+	}
 }
 
 void BlankDemo::Render()

@@ -1,5 +1,10 @@
 #include "Audio.h"
 
+Audio::Audio(const String& name, const String& filePath) : m_name(name)
+{
+	load(filePath.c_str());
+}
+
 void Audio::load(const char* filename)
 {
 	fstream file(filename, std::ios::in | std::ios::beg | std::ios::binary);
@@ -52,6 +57,11 @@ void Audio::load(const char* filename)
 	m_buffer.Flags = XAUDIO2_END_OF_STREAM;
 
 	file.close();
+}
+
+void Audio::play()
+{
+
 }
 
 

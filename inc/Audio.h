@@ -20,32 +20,36 @@
 
 #include <xaudio2.h>
 #include <fstream>
+#include "HelperMacros.h"
+#include <string>
 
 using std::fstream;
+using String = std::string;
 
 class Audio
 {
 public:
 	Audio() = default;
+	Audio(const String& name, const String& filePath);
 	~Audio() {
 		if (m_pDataBuffer)
 		{
 			delete[] m_pDataBuffer;
 			m_pDataBuffer = nullptr;
 		}
-		
 	}
 
 	//Load a wave file to a XAUDIO2BUFFER struct
 	void load(const char* filename);
-	
+	void play();
 	void encode(const char* filename);
 	
 	WAVEFORMATEXTENSIBLE m_waveFile{ 0 };
 	XAUDIO2_BUFFER m_buffer{ 0 };
 
-protected:
 
+	String m_name;
 	unsigned char* m_pDataBuffer = nullptr;
+	IXAudio2SourceVoice* m_pSourceVoice = nullptr;
 };
 

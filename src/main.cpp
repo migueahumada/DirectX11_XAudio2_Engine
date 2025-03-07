@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include <memory>
 #include "BlankDemo.h"
+#include "BaseGame.h"
+#include "TestGame.h"
 
 #define WIDTH 1280
 #define HEIGHT 720
@@ -51,9 +53,9 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE prevInstance,
 
 	ShowWindow(hwnd, cmdShow);
 
-	auto demo = std::make_shared<BlankDemo>();
+	std::shared_ptr<TestGame> game = std::make_shared<TestGame>();
 
-	bool result = demo->Intialize(hInstance, hwnd);
+	bool result = game->Init(hInstance, hwnd);
 	if (!result)
 	{
 		return -1;
@@ -68,12 +70,13 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE prevInstance,
 			DispatchMessage(&msg);
 		}
 		else {
-			demo->Update(0.0f);
-			demo->Render();
+			//GAME LOOP
+			game->Update(0.0f);
+			game->Render();
 		}
 	}
 
-	demo->Shutdown();
+	game->Shutdown();
 
 	return static_cast<int>(msg.wParam);
 

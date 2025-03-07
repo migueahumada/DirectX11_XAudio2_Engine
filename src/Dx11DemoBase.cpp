@@ -122,36 +122,38 @@ bool Dx11DemoBase::Intialize(HINSTANCE hInstance, HWND hwnd)
 		MessageBox(hwnd, L"Failed to initialize XAudio2!", L"Error", MB_OK);
 			return false;
 	}
+	result = m_pXAudio2->StartEngine();
 
+	
 	result = m_pXAudio2->CreateMasteringVoice(&m_pXAudio2MasteringVoice);
 	if (FAILED(result))
 	{
-		MessageBox(hwnd, L"Failed to create XAudio2 Mastering Voice!", L"Error", MB_OK);
-			return false;
+		MessageBox(m_hwnd, L"Failed to create XAudio2 Mastering Voice!", L"Error", MB_OK);
+		return false;
 	}
 
 	const WCHAR* path = L"D:\\Coding\\C++\\Direct3DPractice\\rsc\\AudioPrueba.wav";
 	const char* path2 = "./rsc/AudioPrueba.wav";
 	m_audioFile.load(path2);
 
-	result = m_pXAudio2->CreateSourceVoice(&m_pXAudio2SourceVoice, reinterpret_cast<WAVEFORMATEX*>(& m_audioFile.m_waveFile));
-	
+	result = m_pXAudio2->CreateSourceVoice(&m_pXAudio2SourceVoice, reinterpret_cast<WAVEFORMATEX*>(&m_audioFile.m_waveFile));
+
 	if (FAILED(result))
 	{
-		MessageBox(hwnd, L"Failed create source Voice!", L"Error", MB_OK);
+		MessageBox(m_hwnd, L"Failed create source Voice!", L"Error", MB_OK);
 		return false;
 	}
 
 	result = m_pXAudio2SourceVoice->SubmitSourceBuffer(&m_audioFile.m_buffer);
 	if (FAILED(result))
 	{
-		MessageBox(hwnd, L"Failed create submit buffer!", L"Error", MB_OK);
+		MessageBox(m_hwnd, L"Failed create submit buffer!", L"Error", MB_OK);
 		return false;
 	}
 	result = m_pXAudio2SourceVoice->Start(0);
 	if (FAILED(result))
 	{
-		MessageBox(hwnd, L"Failed to play!", L"Error", MB_OK);
+		MessageBox(m_hwnd, L"Failed to play!", L"Error", MB_OK);
 		return false;
 	}
 
@@ -177,8 +179,6 @@ void Dx11DemoBase::Shutdown()
 
 bool Dx11DemoBase::LoadContent()
 {
-	
-	
 	return true;
 }
 
