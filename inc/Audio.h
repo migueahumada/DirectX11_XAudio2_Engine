@@ -41,7 +41,6 @@ public:
 
 	//Load a wave file to a XAUDIO2BUFFER struct
 	void load(const char* filename);
-	void play();
 	void encode(const char* filename);
 	
 	WAVEFORMATEXTENSIBLE m_waveFile{ 0 };

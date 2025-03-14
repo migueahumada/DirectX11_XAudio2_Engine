@@ -59,10 +59,6 @@ void Audio::load(const char* filename)
 	file.close();
 }
 
-void Audio::play()
-{
-
-}
 
 
 void Audio::encode(const char* filename)

@@ -1,6 +1,9 @@
 #pragma once
 
 #include <Windows.h>
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
 #include "GraphicsAPI.h"
 #include "AudioAPI.h"
 
@@ -32,9 +35,9 @@ public:
 	virtual void UnloadContent();
 
 	virtual void Update(float dt);
-	virtual void Render() = 0;
+	virtual void Render();
 
-protected:
+//protected:
 	//Windows stuff
 	HINSTANCE m_hInstance = nullptr;
 	HWND m_hwnd = nullptr;
@@ -50,6 +53,6 @@ protected:
 
 	SPtr<Audio> pSound;
 	SPtr<Channel> pChannel;
-	
+
 };
 

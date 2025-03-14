@@ -7,10 +7,16 @@ BaseGame::BaseGame()
 BaseGame::~BaseGame()
 {
 	Shutdown();
+	ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 }
 
 bool BaseGame::Init(HINSTANCE hInstance, HWND hwnd) 
 {
+
+	m_hwnd = hwnd;
+
 	m_pGraphicsAPI = make_unique<GraphicsAPI>(hwnd);
 	if (!m_pGraphicsAPI)
 	{
@@ -70,9 +76,25 @@ bool BaseGame::Init(HINSTANCE hInstance, HWND hwnd)
 	}
 
 	pSound = m_pAudioAPI->CreateSoundEffect("Mark","./rsc/AudioPrueba.wav");
+	pSound->m_pSourceVoice->SetVolume(0.04f);
+	m_pAudioAPI->Play(pSound);     
 
-	m_pAudioAPI->Play(pSound);
+	// Setup Dear ImGui context
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO();
 
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
+	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+	io.ConfigDockingAlwaysTabBar = true;
+	io.ConfigDockingTransparentPayload = true;
+	ImGui::StyleColorsDark();
+
+	// Setup Platform/Renderer backends
+	ImGui_ImplWin32_Init(m_hwnd);
+	ImGui_ImplDX11_Init(m_pGraphicsAPI.get()->m_pDevice, m_pGraphicsAPI.get()->m_pDeviceContext);
 	
 
 	return true;
@@ -81,10 +103,12 @@ bool BaseGame::Init(HINSTANCE hInstance, HWND hwnd)
 void BaseGame::Shutdown()
 {
 
+	
 }
 
 bool BaseGame::LoadContent()
 {
+
 	return true;
 }
 
@@ -95,6 +119,14 @@ void BaseGame::UnloadContent()
 
 void BaseGame::Update(float dt)
 {
+	// (Your code process and dispatch Win32 messages)
+	// Start the Dear ImGui frame
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
+
+
 	D3D11_VIEWPORT vp;
 	vp.Width = 480;
 	vp.Height = 720;
@@ -110,8 +142,7 @@ void BaseGame::Update(float dt)
 
 	float clearColor[4] = { 0.5f,0.2f,0.5f,0.5f };
 
-	m_pGraphicsAPI->m_pDeviceContext->ClearRenderTargetView(m_pGraphicsAPI->m_pBackBufferRTV,
-		clearColor);
+	m_pGraphicsAPI->m_pDeviceContext->ClearRenderTargetView(m_pGraphicsAPI->m_pBackBufferRTV, clearColor);
 
 
 	m_pGraphicsAPI->m_pDeviceContext->ClearDepthStencilView(m_pGraphicsAPI->m_pBackBufferDSV,
@@ -136,6 +167,26 @@ void BaseGame::Update(float dt)
 	m_pGraphicsAPI->m_pDeviceContext->Draw(3, 0);
 	//g_pGraphicsAPI->m_pDeviceContext->DrawIndexed();
 
+
+	ImGui::Begin("Hola");
+	ImGui::Text("asdfhasjdhfkljashdlfkjhasdjklf");
+	ImGui::End();
+
+	ImGui::Render();
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+	ImGui::UpdatePlatformWindows();
+	ImGui::RenderPlatformWindowsDefault();
+	
+	//Presenting
 	m_pGraphicsAPI->m_pSwapChain->Present(0, 0);
 
+}
+
+void BaseGame::Render()
+{
+	// Rendering
+// (Your code clears your framebuffer, renders your other stuff etc.)
+	
+	// (Your code calls swapchain's Present() function)
 }

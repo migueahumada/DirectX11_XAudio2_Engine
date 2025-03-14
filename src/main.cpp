@@ -53,13 +53,15 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE prevInstance,
 
 	ShowWindow(hwnd, cmdShow);
 
-	std::shared_ptr<TestGame> game = std::make_shared<TestGame>();
+	std::shared_ptr<BaseGame> game = std::make_shared<BaseGame>();
 
 	bool result = game->Init(hInstance, hwnd);
+	
 	if (!result)
 	{
 		return -1;
 	}
+	
 
 	MSG msg = {0};
 	while (msg.message != WM_QUIT)
@@ -68,23 +70,31 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE prevInstance,
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+
 		}
 		else {
-			//GAME LOOP
+
 			game->Update(0.0f);
 			game->Render();
 		}
 	}
 
+	
 	game->Shutdown();
+	
 
 	return static_cast<int>(msg.wParam);
 
 }
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	PAINTSTRUCT paintStruct;
 	HDC hDC;
+
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, message, wParam, lParam))
+		return 0;
 
 	switch (message)
 	{
@@ -94,6 +104,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
+
 		break;
 	default:
 		return DefWindowProc(hwnd, message, wParam, lParam);
