@@ -1,4 +1,5 @@
 #pragma once
+
 #include <cmath>
 
 struct Vector3
@@ -147,7 +148,7 @@ struct Matrix4 {
 
 struct Camera {
 	//TODO
-	void SetLookAt(const Vector3& eyePos);
+	void SetLookAt(const Vector3& eyePos, const Vector3& targetPos);
 
 	Vector3 position;
 	Vector3 target;

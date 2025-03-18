@@ -1,11 +1,10 @@
 #pragma once
 
+#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
-#include "imgui.h"
-#include "imgui_impl_win32.h"
-#include "imgui_impl_dx11.h"
 #include "GraphicsAPI.h"
 #include "AudioAPI.h"
+#include "ImGuiAPI.h"
 
 
 /*
@@ -43,6 +42,7 @@ public:
 	HWND m_hwnd = nullptr;
 	UPtr<GraphicsAPI> m_pGraphicsAPI;
 	UPtr<AudioAPI> m_pAudioAPI;
+	UPtr<ImGuiAPI> m_pImGuiAPI;
 
 	UPtr<VertexShader> m_pVertexShader;
 	UPtr<PixelShader> m_pPixelShader;

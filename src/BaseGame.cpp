@@ -6,10 +6,10 @@ BaseGame::BaseGame()
 
 BaseGame::~BaseGame()
 {
-	Shutdown();
+	/*Shutdown();
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
-	ImGui::DestroyContext();
+	ImGui::DestroyContext();*/
 }
 
 bool BaseGame::Init(HINSTANCE hInstance, HWND hwnd) 
@@ -79,23 +79,14 @@ bool BaseGame::Init(HINSTANCE hInstance, HWND hwnd)
 	pSound->m_pSourceVoice->SetVolume(0.04f);
 	m_pAudioAPI->Play(pSound);     
 
-	// Setup Dear ImGui context
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
+	m_pImGuiAPI = make_unique<ImGuiAPI>();
+	if (!m_pImGuiAPI->Init(hwnd, m_pGraphicsAPI->m_pDevice, m_pGraphicsAPI->m_pDeviceContext))
+	{
+		MessageBox(hwnd, L"IMGUI object couldn't be created", L"Error", MB_OK);
+		return false;
+	}
 
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
-	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-	io.ConfigDockingAlwaysTabBar = true;
-	io.ConfigDockingTransparentPayload = true;
-	ImGui::StyleColorsDark();
 
-	// Setup Platform/Renderer backends
-	ImGui_ImplWin32_Init(m_hwnd);
-	ImGui_ImplDX11_Init(m_pGraphicsAPI.get()->m_pDevice, m_pGraphicsAPI.get()->m_pDeviceContext);
-	
 
 	return true;
 }
@@ -119,13 +110,8 @@ void BaseGame::UnloadContent()
 
 void BaseGame::Update(float dt)
 {
-	// (Your code process and dispatch Win32 messages)
-	// Start the Dear ImGui frame
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
 
-
+	m_pImGuiAPI->Update();
 
 	D3D11_VIEWPORT vp;
 	vp.Width = 480;
@@ -167,16 +153,7 @@ void BaseGame::Update(float dt)
 	m_pGraphicsAPI->m_pDeviceContext->Draw(3, 0);
 	//g_pGraphicsAPI->m_pDeviceContext->DrawIndexed();
 
-
-	ImGui::Begin("Hola");
-	ImGui::Text("asdfhasjdhfkljashdlfkjhasdjklf");
-	ImGui::End();
-
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
-	ImGui::UpdatePlatformWindows();
-	ImGui::RenderPlatformWindowsDefault();
+	m_pImGuiAPI->Render();
 	
 	//Presenting
 	m_pGraphicsAPI->m_pSwapChain->Present(0, 0);
@@ -185,6 +162,8 @@ void BaseGame::Update(float dt)
 
 void BaseGame::Render()
 {
+
+	
 	// Rendering
 // (Your code clears your framebuffer, renders your other stuff etc.)
 	

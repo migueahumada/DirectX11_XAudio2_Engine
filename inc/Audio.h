@@ -26,6 +26,14 @@
 using std::fstream;
 using String = std::string;
 
+namespace AudioState {
+	enum E {
+		PLAY = 0,
+		STOP,
+		VIRTUAL,
+	};
+}
+
 class Audio
 {
 public:
@@ -50,5 +58,6 @@ public:
 	String m_name;
 	unsigned char* m_pDataBuffer = nullptr;
 	IXAudio2SourceVoice* m_pSourceVoice = nullptr;
+	AudioState::E m_audioState = AudioState::STOP;
 };
 

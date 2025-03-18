@@ -93,6 +93,9 @@
     <ClInclude Include="inc\MathObjects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="inc\ImGuiAPI.h">
+      <Filter>Header Files\ImGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BlankDemo.cpp">
@@ -144,6 +147,9 @@
       <Filter>Source Files\ImGUI</Filter>
     </ClCompile>
     <ClCompile Include="src\imgui_widgets.cpp">
+      <Filter>Source Files\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGuiAPI.cpp">
       <Filter>Source Files\ImGUI</Filter>
     </ClCompile>
   </ItemGroup>

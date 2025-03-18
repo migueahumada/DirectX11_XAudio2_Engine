@@ -146,6 +146,7 @@
     <ClInclude Include="inc\HelperMacros.h" />
     <ClInclude Include="inc\imconfig.h" />
     <ClInclude Include="inc\imgui.h" />
+    <ClInclude Include="inc\ImGuiAPI.h" />
     <ClInclude Include="inc\imgui_impl_dx11.h" />
     <ClInclude Include="inc\imgui_impl_win32.h" />
     <ClInclude Include="inc\imgui_internal.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="src\GraphicsAPI.cpp" />
     <ClCompile Include="src\GraphicsBuffer.cpp" />
     <ClCompile Include="src\imgui.cpp" />
+    <ClCompile Include="src\ImGuiAPI.cpp" />
     <ClCompile Include="src\imgui_draw.cpp" />
     <ClCompile Include="src\imgui_impl_dx11.cpp" />
     <ClCompile Include="src\imgui_impl_win32.cpp" />

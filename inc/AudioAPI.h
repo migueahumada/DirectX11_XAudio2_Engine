@@ -1,4 +1,5 @@
 #pragma once
+
 #include <xaudio2.h>
 #include "Audio.h"
 #include "Channel.h"
@@ -7,6 +8,8 @@
 
 template <typename T>
 using Queue = std::queue<T>;
+
+
 
 class AudioAPI
 {
@@ -23,8 +26,6 @@ public:
 	void Play(SPtr<Audio> audio, SPtr<Channel> channel);
 	
 	void Play(SPtr<Audio> audio);
-
-	
 
 private:
 	IXAudio2* m_pXAudio2 = nullptr;
