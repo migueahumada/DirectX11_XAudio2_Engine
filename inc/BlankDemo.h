@@ -4,8 +4,8 @@
 class BlankDemo : public Dx11DemoBase
 {
 public:
-	BlankDemo();
-	virtual ~BlankDemo();
+	BlankDemo() = default;
+	virtual ~BlankDemo() = default;
 
 	bool LoadContent();
 	void UnloadContent();

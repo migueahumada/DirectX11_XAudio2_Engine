@@ -76,11 +76,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dxguid.lib;dxgi.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,13 +92,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dxguid.lib;dxgi.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -106,11 +108,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dxguid.lib;dxgi.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -121,27 +124,78 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dxguid.lib;dxgi.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="BlankDemo.cpp" />
-    <ClCompile Include="Dx11DemoBase.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MediaReader.cpp" />
+    <ClInclude Include="inc\Audio.h" />
+    <ClInclude Include="inc\AudioAPI.h" />
+    <ClInclude Include="inc\BaseGame.h" />
+    <ClInclude Include="inc\BlankDemo.h" />
+    <ClInclude Include="inc\Channel.h" />
+    <ClInclude Include="inc\Dx11DemoBase.h" />
+    <ClInclude Include="inc\GraphicsAPI.h" />
+    <ClInclude Include="inc\GraphicsBuffer.h" />
+    <ClInclude Include="inc\HelperMacros.h" />
+    <ClInclude Include="inc\imconfig.h" />
+    <ClInclude Include="inc\imgui.h" />
+    <ClInclude Include="inc\ImGuiAPI.h" />
+    <ClInclude Include="inc\imgui_impl_dx11.h" />
+    <ClInclude Include="inc\imgui_impl_win32.h" />
+    <ClInclude Include="inc\imgui_internal.h" />
+    <ClInclude Include="inc\imstb_rectpack.h" />
+    <ClInclude Include="inc\imstb_textedit.h" />
+    <ClInclude Include="inc\imstb_truetype.h" />
+    <ClInclude Include="inc\MathObjects.h" />
+    <ClInclude Include="inc\Shader.h" />
+    <ClInclude Include="inc\TestGame.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h" />
-    <ClInclude Include="BlankDemo.h" />
-    <ClInclude Include="Dx11DemoBase.h" />
-    <ClInclude Include="MediaReader.h" />
+    <ClCompile Include="inc\Shader.cpp" />
+    <ClCompile Include="src\Audio.cpp" />
+    <ClCompile Include="src\AudioAPI.cpp" />
+    <ClCompile Include="src\BaseGame.cpp" />
+    <ClCompile Include="src\BlankDemo.cpp" />
+    <ClCompile Include="src\Channel.cpp" />
+    <ClCompile Include="src\Dx11DemoBase.cpp" />
+    <ClCompile Include="src\GraphicsAPI.cpp" />
+    <ClCompile Include="src\GraphicsBuffer.cpp" />
+    <ClCompile Include="src\imgui.cpp" />
+    <ClCompile Include="src\ImGuiAPI.cpp" />
+    <ClCompile Include="src\imgui_draw.cpp" />
+    <ClCompile Include="src\imgui_impl_dx11.cpp" />
+    <ClCompile Include="src\imgui_impl_win32.cpp" />
+    <ClCompile Include="src\imgui_tables.cpp" />
+    <ClCompile Include="src\imgui_widgets.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\TestGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rsc\AudioPrueba.bin" />
+    <None Include="rsc\BirdDuck .bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="rsc\AudioPrueba.wav" />
+    <Media Include="rsc\BirdDuck.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="rsc\BasicShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
